@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PeerChat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css"  media='screen' href="main.css">
+    
+</head>
+<body>
+
+    <div id="videos">
+        <!-- will use a video tag now 
+        The autoplay attribute, when included in a <video> or <audio> tag, tells the browser to automatically start playing the media as soon as it's loaded and ready.
+        The playsinline attribute, when used in a <video> tag, is primarily used in web development. It ensures that the video will play within the element on the web page without going to fullscreen mode when the user taps on it. -->
+        <video class="video-player" id="user-1" autoplay playsinline></video>
+        <video class="video-player" id="user-2" autoplay playsinline></video>
+    </div>
+
+    <div id="controls">
+        <div class="control-buttons" id="camera">
+            <img src=""/>
+        </div>
+
+        <div class="control-buttons" id="mute">
+            <img src=""/>
+        </div>
+        
+        <a href="lobby.html">
+        <div class="control-buttons" id="leave">
+            <img src=""/>
+        </div>
+    </a>
+    </div>
+    
+</body>
+<script src="agora-rtm-sdk-1.4.4.js"></script>
+<script src="main.js"></script>
+</html>
