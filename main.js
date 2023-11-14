@@ -24,6 +24,7 @@ if(!roomId){
 let localStream; // this my audio and video data variable
 let remoteStream; // this is of other users 
 let peerConnection;
+let userPool = [];
 
 // just copying stuff in here 
 const servers = {
@@ -71,6 +72,20 @@ Think of it like telling the web page, "Hey, the video from the user's camera sh
 
 let handleUserLeft = (MemberId) =>{
     document.getElementById('user-2').style.display = 'none';
+
+    
+    userPool = userPool.filter(user => user !== MemberId);
+
+    // Check if there are users left in the pool
+    if (userPool.length > 0) {
+        // Select the next user from the pool and create a new connection
+        let nextUser = userPool.shift();
+        createOffer(nextUser);
+    } else {
+        // No users left in the pool, handle accordingly (e.g., display a waiting message)
+        console.log('No users left in the pool.');
+    }
+
 }
 
 let handleMessageFromPeer = async (message, MemberId) =>{
@@ -92,6 +107,19 @@ let handleMessageFromPeer = async (message, MemberId) =>{
 let handleUserJoined = async(MemberId) => {
     console.log('A new user has joined the channel')
     createOffer(MemberId);// its called here as we would want the user joined to get the sdp offer
+
+
+
+     console.log('A new user has joined the channel');
+
+    // Add the new user to the pool
+    userPool.push(MemberId);
+
+    // Check if there's an existing user to pair with
+    if (userPool.length > 1) {
+        let pairedUser = userPool.shift(); // Select the next user from the pool
+        createOffer(pairedUser);
+    }
 }
 
 
